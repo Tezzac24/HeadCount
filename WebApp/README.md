@@ -14,7 +14,7 @@ To get started with this app, follow these steps:
 
 1. Clone the repository to your local machine:
    ```bash
-   git clone https://github.com/Sports-Impact-Technologies/Wearable-Server.git
+   git clone https://github.com/Tezzac24/HeadCount.git
 
 2. Navigate to the project directory:
    ```bash

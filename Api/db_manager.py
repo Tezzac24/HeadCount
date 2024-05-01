@@ -35,6 +35,7 @@ class MaxImpactModel(db.Model):
     def __repr__(self):
         return f"Impact(id = {self.id}, player id = {self.player_id}, linear Force = {self.linearForce}, Rotational Force = {self.rotationalForce}, Time = {self.time})"
 
+
 # Validates arguments required for a Player post request
 player_post_args = reqparse.RequestParser()
 player_post_args.add_argument("pid", type=int, help="Player's unique id", required=True)

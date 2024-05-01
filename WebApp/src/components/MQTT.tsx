@@ -36,10 +36,6 @@ export default function MQTTComponent({
         console.log(playerData);
         onPlayerUpdate();
       }
-      if (message.destinationName === "Battery/percentage") {
-        const batteryData = JSON.parse(message.payloadString);
-        console.log(batteryData);
-      }
     };
 
     return () => {

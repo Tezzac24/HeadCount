@@ -1,0 +1,21 @@
+### venv ###
+# Virtualenv
+.Python
+[Bb]in
+[Ii]nclude
+[Ll]ib
+[Ll]ib64
+[Ll]ocal
+[Ss]cripts
+pyvenv.cfg
+.venv
+pip-selfcheck.json
+
+.env
+test.db
+
+__pycache__/
+
+impact_logs
+
+docker-compose.dev.yml

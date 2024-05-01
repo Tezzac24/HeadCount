@@ -1,7 +1,7 @@
 import pytest
 import sys
 sys.path.append("..")
-from sit_api import app
+from db_manager import app
 
 
 def test_create_player():

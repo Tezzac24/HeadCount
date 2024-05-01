@@ -3,7 +3,7 @@ import sys
 import os
 from datetime import datetime
 sys.path.append("..")
-from sit_api import app
+from db_manager import app
 
 date = datetime.today().strftime("%d-%m-%Y")
 

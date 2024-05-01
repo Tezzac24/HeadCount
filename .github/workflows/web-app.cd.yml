@@ -1,0 +1,47 @@
+name: Webapp deployment
+
+on:
+  push:
+    branches:
+      - "*"
+    paths:
+      - "WebApp/**"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up QEMU
+        run: docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+
+      - name: Set Tag Version
+        id: tag_version
+        run: |
+          if [ "${{ github.ref }}" = "refs/heads/main" ]; then
+            echo "TAG_VERSION=latest" >> $GITHUB_ENV
+          else
+            echo "TAG_VERSION=dev" >> $GITHUB_ENV
+          fi
+        # run: echo "TAG_VERSION=$(date +%d.%m.%Y.%H.%M.%S)" >> $GITHUB_ENV
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          context: ./WebApp
+          file: ./WebApp/Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/web-app:${{ env.TAG_VERSION }}
+          platforms: linux/amd64, linux/arm64, linux/arm/v7
